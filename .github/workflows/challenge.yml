@@ -1,0 +1,21 @@
+name: challenge
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9.0.x
+      - name: Run the single catching test
+        run: >
+          dotnet test test/Stateless.Tests/Stateless.Tests.csproj
+          -c Release
+          -f net9.0
+          --filter "FullyQualifiedName~StateRepresentationFixture.WhenTransitioningFromSubToSuperstate_SubstateEntryActionsExecuted"
