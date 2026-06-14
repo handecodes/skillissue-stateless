@@ -176,7 +176,7 @@ namespace Stateless
                 {
                     ExecuteEntryActions(transition, entryArgs);
                 }
-                else if (!Includes(transition.Source))
+                else if (!IsIncludedIn(transition.Source))
                 {
                     if (_superstate != null && !(transition is InitialTransition))
                         _superstate.Enter(transition, entryArgs);
